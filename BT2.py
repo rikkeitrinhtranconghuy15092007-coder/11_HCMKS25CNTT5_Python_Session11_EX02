@@ -1,38 +1,50 @@
-# Số lượng phần tử: product_info ban đầu có 4 phần tử.
+# (1) Phân tích lỗi
+# Dictionary employee gồm những key nào?
+# → "employee_id", "full_name", "department", "status"
+# Vì sao dòng employee_id = employee[0] gây lỗi?
+# → Dictionary không truy cập bằng index (như list). employee[0] đang tìm key tên 0, không tồn tại → KeyError: 0
+# Dictionary có truy cập phần tử bằng index giống list không?
+# → Không. Dictionary truy cập bằng key (string/number).
+# Lấy mã nhân viên đúng:
+# Pythonemployee_id = employee["employee_id"]
+# Vì sao dòng full_name = employee["name"] gây lỗi?
+# → Không tồn tại key "name".
+# Key đúng để lấy họ tên: "full_name"
+# Vì sao dòng employee["employee_status"] = "official" chưa đúng?
+# → Sai key. Nó tạo key mới "employee_status" thay vì cập nhật key "status" đã có.
+# Key đúng để cập nhật trạng thái: "status"
+# Vì sao dòng employee.append("base_salary", 15000000) gây lỗi?
+# → Dictionary không có phương thức append() (append là của list).
+# Cách thêm lương cơ bản đúng:
+# Pythonemployee["base_salary"] = 15000000
+# Vì sao dòng del employee["team"] gây lỗi?
+# → Không tồn tại key "team".
+# Key cần xóa (phòng ban): "department"
 
-# Vị trí của "SP001": Nằm ở index 0.
+# Thông tin nhân viên ban đầu
+employee = {
+    "employee_id": "NV001",
+    "full_name": "Nguyễn Văn An",
+    "department": "Python Backend",
+    "status": "probation"
+}
 
-# Vì sao dòng product_code = product_info[1] sai? Vì index trong Python bắt đầu từ 0. Index 1 là vị trí của tên sản phẩm, không phải mã sản phẩm.
+# Lấy mã nhân viên
+employee_id = employee["employee_id"]
 
-# Vị trí của "Áo polo nam": Nằm ở index 1.
+# Lấy họ tên nhân viên
+full_name = employee["full_name"]
 
-# Vì sao dòng product_name = product_info[2] sai? Vì index 2 là vị trí của kích cỡ ("Size L").
+# Cập nhật trạng thái nhân viên
+employee["status"] = "official"
 
-# Lỗi .length(): Dòng product_info.length() bị lỗi vì kiểu dữ liệu tuple trong Python không có phương thức này.
+# Thêm lương cơ bản
+employee["base_salary"] = 15000000
 
-# Hàm thay thế: Phải dùng hàm len(product_info).
+# Xóa thông tin phòng ban
+del employee["department"]
 
-# Lỗi thay đổi giá trị (product_info[3] = 279000): Dòng này không hợp lệ vì tuple là kiểu dữ liệu immutable (bất biến), không cho phép sửa trực tiếp phần tử sau khi tạo.
-
-# Cách xử lý: Phải tạo một tuple mới chứa giá bán mới.
-
-# Thông tin sản phẩm ban đầu
-product_info = ("SP001", "Áo polo nam", "Size L", 299000)
-
-# Lấy mã sản phẩm (Sửa index thành 0)
-product_code = product_info[0]
-
-# Lấy tên sản phẩm (Sửa index thành 1)
-product_name = product_info[1]
-
-# Đếm số lượng thông tin sản phẩm (Dùng hàm len())
-product_length = len(product_info)
-
-# Cập nhật giá bán bằng cách tạo một tuple mới hoàn toàn
-product_info = (product_info[0], product_info[1], product_info[2], 279000)
-
-# Hiển thị kết quả
-print("Mã sản phẩm:", product_code)
-print("Tên sản phẩm:", product_name)
-print("Số lượng thông tin sản phẩm:", product_length)
-print("Thông tin sản phẩm sau cập nhật:", product_info)
+# Kết quả
+print("Mã nhân viên:", employee_id)
+print("Họ tên nhân viên:", full_name)
+print("Thông tin nhân viên sau xử lý:", employee)
